@@ -1,0 +1,20 @@
+import express from 'express'
+import {
+  signup,
+  login,
+  logout,
+  updateProfile,
+  checkAuth,
+} from '../controllers/auth.controller'
+import { protectRoute } from '../middlewares/auth.middleeware'
+
+const router = express.Router()
+
+router.post('/signup', signup)
+router.post('/login', login)
+router.post('/logout', protectRoute, logout)
+
+router.patch('/update-profile', protectRoute, updateProfile)
+router.patch('/check', protectRoute, checkAuth)
+
+export default router
