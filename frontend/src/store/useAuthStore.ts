@@ -3,7 +3,8 @@ import axiosInstance from '../lib/axios'
 import toast from 'react-hot-toast'
 import axios from 'axios'
 import { type Socket, io } from 'socket.io-client'
-const BASE_URL = 'http://localhost:5174'
+const BASE_URL =
+  import.meta.env.MODE === 'development' ? 'http://localhost:5174' : '/'
 
 interface AuthState {
   authUser: any | null
