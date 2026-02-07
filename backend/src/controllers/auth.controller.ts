@@ -42,12 +42,7 @@ export async function signup(req: Request, res: Response) {
         },
       )
       await newUser.save()
-      res.status(201).json({
-        id: newUser._id,
-        fullName,
-        email,
-        profilePic: newUser.profilePic,
-      })
+      res.status(201).json(newUser)
     } else {
       res.status(400).json({ message: 'Invalid user data.' })
     }
@@ -79,12 +74,7 @@ export async function login(req: Request, res: Response) {
       httpOnly: true,
       maxAge: 7 * 24 * 60 * 60 * 1000,
     })
-    res.json({
-      id: user._id,
-      fullName: user.fullName,
-      email,
-      profilePic: user.profilePic,
-    })
+    res.json(user)
   } catch (error) {
     console.log('Error in login controller:', error)
     res.status(500).json({ message: 'Internal server error.' })
@@ -116,9 +106,7 @@ export async function updateProfile(req: Request, res: Response) {
       },
       { new: true },
     )
-    res.json({
-      profilePic: updatedUser?.profilePic,
-    })
+    res.json(updatedUser)
   } catch (error) {
     console.log('Error in updateProfile controller:', error)
     res.status(500).json({ message: 'Internal server error.' })

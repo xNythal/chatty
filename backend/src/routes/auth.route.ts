@@ -15,6 +15,6 @@ router.post('/login', login)
 router.post('/logout', protectRoute, logout)
 
 router.patch('/update-profile', protectRoute, updateProfile)
-router.patch('/check', protectRoute, checkAuth)
+router.get('/check', protectRoute, checkAuth)
 
 export default router

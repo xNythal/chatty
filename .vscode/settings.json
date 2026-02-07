@@ -1,0 +1,29 @@
+{
+  "terminal.integrated.profiles.windows": {
+    "Backend": {
+      "source": "Git Bash",
+      "args": ["-c", "cd backend && exec bash"],
+      "icon": "server",
+      "color": "terminal.ansiMagenta",
+      "overrideName": true
+    },
+    "Frontend": {
+      "source": "Git Bash",
+      "args": ["-c", "cd frontend && exec bash"],
+      "icon": "browser",
+      "color": "terminal.ansiCyan",
+      "overrideName": true
+    },
+    "Toolbox": {
+      "source": "Git Bash",
+      "icon": "tools",
+      "color": "terminal.ansiGreen",
+      "overrideName": true
+    },
+    "Git Bash": null,
+    "PowerShell": null,
+    "Command Prompt": null,
+    "JavaScript Debug Terminal": null,
+    "Spell Checker REPL": null,
+  }
+}

@@ -4,6 +4,7 @@ import Message from '../models/message.model'
 import type { QueryFilter } from 'mongoose'
 import mongoose from 'mongoose'
 import cloudinary from '../lib/cloudinary'
+import { getReceiverSocketID, io } from '../lib/socket'
 
 export async function getUsersForSidebar(req: Request, res: Response) {
   try {
@@ -32,6 +33,7 @@ export async function getMessages(req: Request, res: Response) {
         { senderID: receiverObjectID, receiverID: senderObjectID },
       ],
     })
+    res.json(messages)
   } catch (error) {}
 }
 
@@ -52,7 +54,12 @@ export async function sendMessage(req: Request, res: Response) {
       image: imageURL,
     })
     await newMessage.save()
-    // todo: realtime functionality
+
+    const receiverSocket = getReceiverSocketID(receiverID)
+    if (receiverSocket) {
+      io.to(receiverSocket).emit('newMessage', newMessage)
+    }
+
     res.status(201).json(newMessage)
   } catch (error) {
     console.log('Error in sendMessage controller:', error)
